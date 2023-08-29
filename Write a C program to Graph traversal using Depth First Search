@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define V 6 // Number of vertices in the graph
+
+// Function to perform Depth First Search traversal
+void dfs(int graph[V][V], int vertex, bool visited[]) {
+    visited[vertex] = true;
+    printf("%d ", vertex);
+    
+    for (int i = 0; i < V; i++) {
+        if (graph[vertex][i] && !visited[i]) {
+            dfs(graph, i, visited);
+        }
+    }
+}
+
+// Function to initialize DFS traversal
+void dfsTraversal(int graph[V][V], int startVertex) {
+    bool visited[V];
+    for (int i = 0; i < V; i++) {
+        visited[i] = false;
+    }
+    
+    dfs(graph, startVertex, visited);
+}
+
+int main() {
+    int graph[V][V] = {
+        {0, 1, 1, 0, 0, 0},
+        {1, 0, 0, 1, 1, 0},
+        {1, 0, 0, 0, 1, 1},
+        {0, 1, 0, 0, 0, 0},
+        {0, 1, 1, 0, 0, 1},
+        {0, 0, 1, 0, 1, 0}
+    };
+
+    int startVertex = 0; // Starting vertex for DFS traversal
+    printf("DFS Traversal starting from vertex %d:\n", startVertex);
+    dfsTraversal(graph, startVertex);
+    
+    return 0;
+}
